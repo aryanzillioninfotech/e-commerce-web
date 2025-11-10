@@ -15,6 +15,8 @@ const products = [
 ];
 
 
+
+
 const ProductsPage: React.FC = () => {
   const { addToCart } = useCart();
 
