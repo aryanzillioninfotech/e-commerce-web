@@ -14,6 +14,7 @@ const products = [
   { id: 9, name: "Classic Tee", price: 1299 },
 ];
 
+
 const ProductsPage: React.FC = () => {
   const { addToCart } = useCart();
 
