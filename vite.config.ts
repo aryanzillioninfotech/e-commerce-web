@@ -11,10 +11,18 @@ export default defineConfig({
     // Configuration for preprocessors like SCSS
     preprocessorOptions: {
       scss: {
-        // We use 'as any' here to bypass the TypeScript error (2769).
-        // The 'implementation' property is required to fix the deployment,
-        // but it is not included in Vite's default type definitions.
-        implementation: require('sass'),
+        // FIX: We must use a dynamic import and wrap it in a Promise to correctly
+        // load the 'sass' module in an ES Module project that uses the 'require' 
+        // fallback inside the implementation property.
+        implementation: (async () => {
+          // Check if 'sass' is installed before importing (optional safety)
+          try {
+            return (await import('sass')).default;
+          } catch (e) {
+            console.error("Failed to load 'sass' implementation:", e);
+            throw e; // Re-throw to fail build if necessary dependency is missing
+          }
+        })(),
       } as any,
     },
   },
