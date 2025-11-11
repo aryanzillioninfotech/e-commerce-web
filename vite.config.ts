@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import * as sass from 'sass'
+// import * as sass from 'sass'
 
 // This configuration explicitly forces Vite to use the pure JavaScript
 // implementation of the 'sass' dependency to resolve the Vercel build error
