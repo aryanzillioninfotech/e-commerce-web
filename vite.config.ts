@@ -15,16 +15,16 @@ export default defineConfig({
         // FIX: We must use a dynamic import and wrap it in a Promise to correctly
         // load the 'sass' module in an ES Module project that uses the 'require' 
         // fallback inside the implementation property.
-        implementation: sass
-        // (async () => {
-        //   // Check if 'sass' is installed before importing (optional safety)
-        //   try {
-        //     return (await import('sass')).default;
-        //   } catch (e) {
-        //     console.error("Failed to load 'sass' implementation:", e);
-        //     throw e; // Re-throw to fail build if necessary dependency is missing
-        //   }
-        // })(),
+        implementation:
+        (async () => {
+          // Check if 'sass' is installed before importing (optional safety)
+          try {
+            return (await import('sass')).default;
+          } catch (e) {
+            console.error("Failed to load 'sass' implementation:", e);
+            throw e; // Re-throw to fail build if necessary dependency is missing
+          }
+        })(),
       } as any,
     },
   },
